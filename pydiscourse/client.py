@@ -1237,6 +1237,24 @@ class DiscourseClient(object):
         kwargs["parent_tag_name"] = parent_tag_name
         return self._post("/tag_groups", json=True, **kwargs)["tag_group"]
 
+    def invite_by_email(self, username, email, **kwargs):
+        """
+        Invite a new user by email address
+
+        Args:
+            username: Username of the account which is sending the invitation
+            email: Email address of the person who is being invited
+            **kwargs: Can use `group_names` to invite the user to one or more named groups.
+
+        Returns:
+            JSON API response
+
+        """
+        kwargs["username"] = username
+        kwargs["email"] = email
+        return self._post("/invites", **kwargs)
+
+
     def _get(self, path, **kwargs):
         """
 
